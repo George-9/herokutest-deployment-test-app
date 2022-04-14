@@ -8,14 +8,14 @@ const homepage = (req, resp) => {
   // resp.contentType('application/json');
 
   var data = JSON.stringify({
-    collection: "decorations",
-    database: "items",
+    collection: "library_data",
+    database: "bkict",
     dataSource: "Cluster0",
   });
 
   var config = {
     method: "post",
-    url: "https://data.mongodb-api.com/app/data-fwnxq/endpoint/data/beta/action/findOne",
+    url: "https://data.mongodb-api.com/app/data-fwnxq/endpoint/data/beta/action/find",
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Request-Headers": "*",
@@ -29,7 +29,9 @@ const homepage = (req, resp) => {
     .then(async function (response) {
       var info = await response.data;
       console.log(data);
-      resp.status(200).json(info);
+
+
+      resp.status(200).json(info['documents'][0]);
     })
     .catch(function (error) {
       console.log(error);
@@ -46,8 +48,6 @@ const signIn = async (req, resp) => {
       db.close();
     });
   });
-
-  // var map = req.body;
   console.log(MongoClient);
 };
 
