@@ -32,7 +32,7 @@ const getict = (_, resp) => {
       var info = await response.data;
       console.log(data);
 
-      resp.status(200).json(info["documents"][0]);
+      resp.status(200).json(info);
     })
     .catch(function (error) {
       console.log(error);
@@ -66,7 +66,7 @@ const getbookshop = (_, resp) => {
       var info = await response.data;
       console.log(data);
 
-      resp.status(200).json(info["documents"][0]);
+      resp.status(200).json(info);
     })
     .catch(function (error) {
       console.log(error);
