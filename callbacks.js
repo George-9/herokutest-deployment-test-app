@@ -1,5 +1,7 @@
 const MongoClient = require("mongodb").MongoClient;
 
+var axios = require('axios');
+
 const url = "mongodb://localhost:27017/";
 
 const homepage = (req, resp) => {
@@ -14,8 +16,32 @@ const homepage = (req, resp) => {
           db.close();
         });
       });
-
-    resp.send(MongoClient.toString());
+      var data = JSON.stringify({
+          "collection": "decorations",
+          "database": "items",
+          "dataSource": "Cluster0",
+      });
+                  
+      var config = {
+          method: 'post',
+          url: 'https://data.mongodb-api.com/app/data-fwnxq/endpoint/data/beta/action/findOne',
+          headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*',
+              'api-key': 'Ko615ZPA0wwD2CrD6UyudcMFZvlP68u3fa6f3WUZmMETe4rIdO68GsYOixBASa4s              '
+          },
+          data : data
+      };
+                  
+      axios(config)
+          .then(function (response) {
+              resp.send(response.toString());
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+      
+    
     resp.end();
 };
 
