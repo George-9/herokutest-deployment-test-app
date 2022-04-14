@@ -1,9 +1,21 @@
-import { createServer } from "http";
+const express = require('express'), 
+      cors = require('cors')(),
+      mongoClient = require('mongodb').MongoClient
 
-createServer(function(req, resp){
-    console.log(req.body);
-    resp.end('recieved')
+const port = process.env.PORT ||  8000
+
+
+const app = express()
+
+app.use(express.static(__dirname))
+app.use(express.urlencoded({extended: true, limit: '50mbs'}))
+app.use(cors)
+
+app.get('/',function(req, resp){
+      resp.send('hello User');
+      resp.end()
 })
 
-//.listen(8080, ()=> console.log("server running"))
-
+app.listen(port,()=>{
+      console.log('server running')
+})
