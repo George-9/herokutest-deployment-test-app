@@ -5,6 +5,10 @@ var axios = require("axios");
 const url = "mongodb://localhost:27017/";
 
 const homepage = (req, resp) => {
+  resp.redirect('./home.html')
+};
+
+const getIct = (req, resp) => {
   // resp.contentType('application/json');
 
   var data = JSON.stringify({
@@ -30,26 +34,25 @@ const homepage = (req, resp) => {
       var info = await response.data;
       console.log(data);
 
-
-      resp.status(200).json(info['documents'][0]);
+      resp.status(200).json(info["documents"][0]);
     })
     .catch(function (error) {
       console.log(error);
     });
 };
 
-const signIn = async (req, resp) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var dbo = db.db("mydb");
-    dbo.createCollection("customers", function (err, res) {
-      if (err) throw err;
-      console.log("Collection created!");
-      db.close();
-    });
-  });
-  console.log(MongoClient);
-};
+// const signIn = async (req, resp) => {
+//   MongoClient.connect(url, function (err, db) {
+//     if (err) throw err;
+//     var dbo = db.db("mydb");
+//     dbo.createCollection("customers", function (err, res) {
+//       if (err) throw err;
+//       console.log("Collection created!");
+//       db.close();
+//     });
+//   });
+//   console.log(MongoClient);
+// };
 
 // const logIn = async (req, resp) => {
 //     var map = req.body;
@@ -168,5 +171,5 @@ module.exports = {
   // getInfo,
   listen,
   // logIn,
-  signIn,
+  // signIn,
 };
