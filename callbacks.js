@@ -5,7 +5,7 @@ const url = "mongodb://localhost:27017/";
 const homepage = (req, resp) => {
     console.log(req.body);
 
-    resp.send("sign_in.html");
+    resp.send(mongoClient);
     resp.end();
 };
 
