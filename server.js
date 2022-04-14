@@ -12,7 +12,7 @@ const port = require("./port.js").c110;
 
 app.get("/", homepage);
 app.post("/signin", signIn);
-app.post("/login", logIn);
-app.get("/posts", getInfo);
-app.post("/uploadtext", uploadText);
+// app.post("/login", logIn);
+// app.get("/posts", getInfo);
+// app.post("/uploadtext", uploadText);
 app.listen(port, listen(port));
