@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb").MongoClient;
+const mongoClient = require("mongodb").MongoClient;
 
 const url = "mongodb://localhost:27017/";
 
@@ -11,10 +11,10 @@ const homepage = (req, resp) => {
 
 
 const signIn = async (req, resp) => {
-   
+
 
     var map = req.body;
-    console.log(req.body);
+    console.log(mongoClient);
   
 };
 
