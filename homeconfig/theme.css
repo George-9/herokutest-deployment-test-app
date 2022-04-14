@@ -2,9 +2,13 @@
     opacity: .5;
     color: grey;
     font-size: 32px;
+    border: 2px solid rgb(82, 130, 232);
+    padding: 1px;
+    width: fit-content;
 }
 
 .pics{
     height: 20%;
     max-width: 20%;
+    border-radius: 10px;
 }
