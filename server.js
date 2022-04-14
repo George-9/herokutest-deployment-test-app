@@ -1,21 +1,18 @@
-const express = require('express'), 
-      cors = require('cors')(),
-      mongoClient = require('mongodb').MongoClient
+var app = require("./express").app;
 
-const port = process.env.PORT ||  8000
+const homepage = require("./callbacks").homepage;
+const uploadText = require("./callbacks").uploadText;
+const getInfo = require("./callbacks").getInfo;
+const listen = require("./callbacks").listen;
+const signIn = require("./callbacks").signIn;
+const logIn = require("./callbacks").logIn;
+
+const port = require("./port.js").c110;
 
 
-const app = express()
-
-app.use(express.static(__dirname))
-app.use(express.urlencoded({extended: true, limit: '50mbs'}))
-app.use(cors)
-
-app.get('/',function(req, resp){
-      resp.redirect('login.html');
-      resp.end()
-})
-
-app.listen(port,()=>{
-      console.log('server running')
-})
+app.get("/", homepage);
+app.post("/signin", signIn);
+app.post("/login", logIn);
+app.get("/posts", getInfo);
+app.post("/uploadtext", uploadText);
+app.listen(port, listen(port));
