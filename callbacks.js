@@ -1,9 +1,19 @@
-const mongoClient = require("mongodb").MongoClient;
+const MongoClient = require("mongodb").MongoClient;
 
 const url = "mongodb://localhost:27017/";
 
 const homepage = (req, resp) => {
     console.log(req.body);
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        dbo.createCollection("customers", function(err, res) {
+          if (err) throw err;
+          console.log("Collection created!");
+          db.close();
+        });
+      });
 
     resp.send(mongoClient.toString());
     resp.end();
@@ -12,9 +22,18 @@ const homepage = (req, resp) => {
 
 const signIn = async (req, resp) => {
 
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        dbo.createCollection("customers", function(err, res) {
+          if (err) throw err;
+          console.log("Collection created!");
+          db.close();
+        });
+      });
 
-    var map = req.body;
-    console.log(mongoClient);
+    // var map = req.body;
+    console.log(MongoClient);
   
 };
 
