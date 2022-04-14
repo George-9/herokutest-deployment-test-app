@@ -5,7 +5,7 @@ const url = "mongodb://localhost:27017/";
 const homepage = (req, resp) => {
     console.log(req.body);
 
-    resp.send(mongoClient);
+    resp.send(mongoClient.toString());
     resp.end();
 };
 
