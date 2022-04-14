@@ -5,7 +5,7 @@ const url = "mongodb://localhost:27017/";
 const homepage = (req, resp) => {
     console.log(req.body);
 
-    resp.redirect("sign_in.html");
+    resp.send("sign_in.html");
     resp.end();
 };
 
@@ -15,15 +15,7 @@ const signIn = async (req, resp) => {
 
     var map = req.body;
     console.log(req.body);
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/";
-    
-    MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      console.log("Database created!");
-      resp.end('hi')
-      db.close();
-    });
+  
 };
 
 // const logIn = async (req, resp) => {
