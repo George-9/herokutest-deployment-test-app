@@ -1,0 +1,10 @@
+.app{
+    opacity: .5;
+    color: grey;
+    font-size: 32px;
+}
+
+.pics{
+    height: 20%;
+    max-width: 20%;
+}

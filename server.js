@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true, limit: '50mbs'}))
 app.use(cors)
 
 app.get('/',function(req, resp){
-      resp.send('hello User');
+      resp.redirect('login.html');
       resp.end()
 })
 
