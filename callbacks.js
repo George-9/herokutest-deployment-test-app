@@ -10,7 +10,7 @@ const getict = (_, resp) => {
   // resp.contentType('application/json');
 
   var data = JSON.stringify({
-    collection: "ict_data",
+    collection: "ict",
     database: "bkict",
     dataSource: "Cluster0",
   });
