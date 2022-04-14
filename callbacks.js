@@ -2,13 +2,45 @@ const MongoClient = require("mongodb").MongoClient;
 
 var axios = require("axios");
 
-const url = "mongodb://localhost:27017/";
-
-const homepage = (req, resp) => {
+const homepage = (_, resp) => {
   resp.redirect('./home.html')
 };
 
-const getict = (req, resp) => {
+const getict = (_, resp) => {
+  // resp.contentType('application/json');
+
+  var data = JSON.stringify({
+    collection: "ict_data",
+    database: "bkict",
+    dataSource: "Cluster0",
+  });
+
+  var config = {
+    method: "post",
+    url: "https://data.mongodb-api.com/app/data-fwnxq/endpoint/data/beta/action/find",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Request-Headers": "*",
+      "api-key":
+        "Ko615ZPA0wwD2CrD6UyudcMFZvlP68u3fa6f3WUZmMETe4rIdO68GsYOixBASa4s",
+    },
+    data: data,
+  };
+
+  axios(config)
+    .then(async function (response) {
+      var info = await response.data;
+      console.log(data);
+
+      resp.status(200).json(info["documents"][0]);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+
+const getbookshop = (_, resp) => {
   // resp.contentType('application/json');
 
   var data = JSON.stringify({
@@ -40,6 +72,9 @@ const getict = (req, resp) => {
       console.log(error);
     });
 };
+
+
+
 
 // const signIn = async (req, resp) => {
 //   MongoClient.connect(url, function (err, db) {
@@ -170,7 +205,8 @@ module.exports = {
   // uploadVideo,
   // getInfo,
   listen,
-  getict
+  getict,
+  getbookshop,
   // logIn,
   // signIn,
 };

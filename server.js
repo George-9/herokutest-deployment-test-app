@@ -8,6 +8,10 @@ const listen = require("./callbacks").listen;
 // const logIn = require("./callbacks").logIn;
 const getictdata = require('./callbacks').getict
 
+//getbookshop_data
+const getbookshop_data = require('./callbacks').getbookshop
+
+
 const port = require("./port.js").c110;
 
 //homepage
@@ -16,6 +20,8 @@ app.get("/", homepage);
 //ict info
 app.get('/ict',getictdata)
 
+//bookshopdata
+app.get('/bookshop', getbookshop_data)
 
 
 
