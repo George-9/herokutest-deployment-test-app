@@ -15,7 +15,7 @@ const homepage = (req, resp) => {
         });
       });
 
-    resp.send(mongoClient.toString());
+    resp.send(MongoClient.toString());
     resp.end();
 };
 
