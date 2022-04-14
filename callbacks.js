@@ -1,66 +1,54 @@
 const MongoClient = require("mongodb").MongoClient;
 
-var axios = require('axios');
+var axios = require("axios");
 
 const url = "mongodb://localhost:27017/";
 
 const homepage = (req, resp) => {
-    console.log(req.body);
+  // resp.contentType('application/json');
 
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("mydb");
-        dbo.createCollection("customers", function(err, res) {
-          if (err) throw err;
-          console.log("Collection created!");
-          db.close();
-        });
-      });
-      var data = JSON.stringify({
-          "collection": "decorations",
-          "database": "items",
-          "dataSource": "Cluster0",
-      });
-                  
-      var config = {
-          method: 'post',
-          url: 'https://data.mongodb-api.com/app/data-fwnxq/endpoint/data/beta/action/findOne',
-          headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Request-Headers': '*',
-              'api-key': 'Ko615ZPA0wwD2CrD6UyudcMFZvlP68u3fa6f3WUZmMETe4rIdO68GsYOixBASa4s              '
-          },
-          data : data
-      };
-                  
-      axios(config)
-          .then(function (response) {
-              resp.send(response.toString());
-          })
-          .catch(function (error) {
-              console.log(error);
-          });
-      
-    
-    resp.end();
+  var data = JSON.stringify({
+    collection: "decorations",
+    database: "items",
+    dataSource: "Cluster0",
+  });
+
+  var config = {
+    method: "post",
+    url: "https://data.mongodb-api.com/app/data-fwnxq/endpoint/data/beta/action/findOne",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Request-Headers": "*",
+      "api-key":
+        "Ko615ZPA0wwD2CrD6UyudcMFZvlP68u3fa6f3WUZmMETe4rIdO68GsYOixBASa4s",
+    },
+    data: data,
+  };
+
+  axios(config)
+    .then(async function (response) {
+      var info = await response.data;
+      console.log(data);
+      resp.status(200).json(info);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
-
 const signIn = async (req, resp) => {
+  MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");
+    dbo.createCollection("customers", function (err, res) {
+      if (err) throw err;
+      console.log("Collection created!");
+      db.close();
+    });
+  });
 
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("mydb");
-        dbo.createCollection("customers", function(err, res) {
-          if (err) throw err;
-          console.log("Collection created!");
-          db.close();
-        });
-      });
-
-    // var map = req.body;
-    console.log(MongoClient);
-  
+  // var map = req.body;
+  console.log(MongoClient);
 };
 
 // const logIn = async (req, resp) => {
@@ -74,7 +62,7 @@ const signIn = async (req, resp) => {
 //             .findOne({ email: map.email });
 
 //         console.log(person);
-        
+
 //     });
 // };
 
@@ -99,7 +87,6 @@ const signIn = async (req, resp) => {
 //     resp.send("uploaded");
 //     resp.end();
 // };
-
 
 // const uploadImage = (req, resp) => {
 //     var map = req.body;
@@ -145,10 +132,6 @@ const signIn = async (req, resp) => {
 //     resp.end();
 // };
 
-
-
-
-
 // const getInfo = (req, resp) => {
 //     map = req.body
 //     console.log(map);
@@ -174,16 +157,16 @@ const signIn = async (req, resp) => {
 // }
 
 const listen = () => {
-    console.log(`server listening on port: ${require('./port.js').c110}`);
+  console.log(`server listening on port: ${require("./port.js").c110}`);
 };
 
 module.exports = {
-    homepage,
-    // uploadText,
-    // uploadImage,
-    // uploadVideo,
-    // getInfo,
-    listen,
-    // logIn,
-    signIn,
+  homepage,
+  // uploadText,
+  // uploadImage,
+  // uploadVideo,
+  // getInfo,
+  listen,
+  // logIn,
+  signIn,
 };
