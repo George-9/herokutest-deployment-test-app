@@ -8,7 +8,7 @@ const homepage = (req, resp) => {
   resp.redirect('./home.html')
 };
 
-const getIct = (req, resp) => {
+const getict = (req, resp) => {
   // resp.contentType('application/json');
 
   var data = JSON.stringify({
@@ -170,6 +170,7 @@ module.exports = {
   // uploadVideo,
   // getInfo,
   listen,
+  getict
   // logIn,
   // signIn,
 };
